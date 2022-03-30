@@ -1,0 +1,18 @@
+.profile__name-user {
+    grid-area: user-name;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    font-family: Inter;
+    font-weight: 500;
+    align-self: end;
+    line-height: 73%;
+}
+@media screen and (max-width: 320px){
+    .profile__name-user{
+        font-size: 27px;
+        line-height: 32.68px;
+        margin: 0 10px 0 25px;
+    }
+    
+}
