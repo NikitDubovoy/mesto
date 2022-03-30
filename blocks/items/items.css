@@ -8,6 +8,6 @@
 
 @media screen and (max-width: 320px){
     .items {
-        justify-content: center
+        justify-content: center;
     }
 }
