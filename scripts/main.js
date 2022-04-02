@@ -1,7 +1,7 @@
 let popup = document.querySelector('.popup');
 let editBtn = document.querySelector('.profile__edit-button');
-let nameInput = popup.querySelector('.popup__input-name');
-let discInput = popup.querySelector('.popup__input-discription');
+let nameInput = document.getElementsByName('name')[0];
+let discInput = document.getElementsByName('discription')[0];
 let userName = document.querySelector('.profile__name-user');
 let userDescription = document.querySelector('.profile__description');
 

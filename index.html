@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/index.css">
+        <link rel="stylesheet" href="./page/index.css">
         <title>Mesto</title>
       </head>
     <body class="page">
@@ -15,41 +15,41 @@
                 <div class="profile__info">
                     <img class="profile__avatar" src="images/Avatar.jpg" alt="Аватар">
                     <h1 class="profile__name-user">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button"></button>
+                    <button type="button" class="profile__edit-button"></button>
                     <p class="profile__description">Исследователь океана</p>
                 </div>
-                <button class="profile__add-button"></button>
+                <button type="button" class="profile__add-button"></button>
             </section>
             <section class="items">
                 <div class="items__content">
                     <img class="items__image" src="images/items/artem-maltsev-h31mHmLFX_A-unsplash.jpg" alt="Карелия">
                     <h2 class="items__title">Карелия</h2>
-                    <button class="items__like-button"></button>
+                    <button type="button" class="items__like-button"></button>
                 </div>
                 <div class="items__content">
                     <img class="items__image" src="images/items/kirill-pershin-10884304-unsplash.jpg" alt="Карачаевск">
                     <h2 class="items__title">Карачаевск</h2>
-                    <button class="items__like-button"></button>
+                    <button type="button" class="items__like-button"></button>
                 </div>
                 <div class="items__content">
                     <img class="items__image" src="images/items/kirill-pershin-LHtk2-rINmc-unsplash.jpg" alt="Зеленоград">
                     <h2 class="items__title">Зеленоград</h2>
-                    <button class="items__like-button"></button>
+                    <button type="button" class="items__like-button"></button>
                 </div>
                 <div class="items__content">
                     <img class="items__image" src="images/items/pavel-anoshin-d3AFql-AGvc-unsplash.jpg" alt="Владивосток">
                     <h2 class="items__title">Владивосток</h2>
-                    <button class="items__like-button"></button>
+                    <button type="button" class="items__like-button"></button>
                 </div>
                 <div class="items__content">
                     <img class="items__image" src="images/items/philipp-trubchenko-gdqLz1LFsxI-unsplash.jpg" alt="Байкал">
                     <h2 class="items__title">Байкал</h2>
-                    <button class="items__like-button"></button>
+                    <button type="button" class="items__like-button"></button>
                 </div>
                 <div class="items__content">
                     <img class="items__image" src="images/items/vladimir-fedotov-GWggAB8uAlA-unsplash.jpg" alt="Коми">
                     <h2 class="items__title">Коми</h2>
-                    <button class="items__like-button"></button>
+                    <button type="button" class="items__like-button"></button>
                 </div>
             </section>
         </main>
@@ -57,14 +57,14 @@
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
         <div class="popup">
-            <form class="popup__form">
-                <button class="popup__closed"></button>
+            <form name="info-user"  class="popup__form">
+                <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input-name" type="text" placeholder="Имя" name="name">
-                <input class="popup__input popup__input-discription" placeholder="О себе" name="discription" >
+                <input class="popup__input" type="text" placeholder="Имя" name="name" value="qwe">
+                <input class="popup__input" type="text" placeholder="О себе" name="discription" >
                 <button class="popup__save-button" type="submit">Сохранить</button>
             </form>
         </div>
-        <script src="script/main.js"></script>
+        <script src="scripts/main.js"></script>
     </body>
 </html>

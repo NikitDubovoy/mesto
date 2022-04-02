@@ -15,9 +15,10 @@
 }
 
 .items__like-button:hover {
-    background-image: url(../../../images/icons/like-hover.svg);
+    opacity: 0.5;
 }
 
 .items__like-button:active {
     background-image: url(../../../images/icons/like-active.svg);
+    opacity: 1;
 }

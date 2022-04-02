@@ -5,11 +5,11 @@
     "avatar user-name edit-button"
     "avatar description description";
     grid-template-columns: 150px max-content 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    
+    grid-template-rows: 71px 1fr;
+
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 730px){
    .profile__info{
     grid-template-columns: max-content;
     grid-template-rows: repeat(3, auto);
