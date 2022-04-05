@@ -11,12 +11,12 @@
 
 @media screen and (max-width: 730px){
    .profile__info{
-    grid-template-columns: max-content;
-    grid-template-rows: repeat(3, auto);
-    grid-template-areas: 
-    "avatar avatar"
-    "user-name edit-button"
-    "description description";
-    justify-items: center;
+        grid-template-columns: max-content;
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas: 
+        "avatar avatar"
+        "user-name edit-button"
+        "description description";
+        justify-items: center;
     }
 }
