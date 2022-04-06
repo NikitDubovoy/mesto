@@ -12,3 +12,9 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+@media screen and (max-width: 360px){
+    .items__title {
+        margin: 0 25px 26px 21px;
+    }
+}
