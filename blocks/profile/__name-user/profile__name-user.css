@@ -13,6 +13,7 @@
     overflow: hidden;
     line-height: 48px;
 }
+
 @media screen and (max-width: 730px){
     .profile__name-user{
         max-width: 200px;
