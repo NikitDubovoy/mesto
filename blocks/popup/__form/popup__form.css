@@ -3,7 +3,7 @@
     background-color: #fff;
     border-radius: 10px;
     margin: 200px auto 0;
-    padding: 34px 36px 20px;
+    padding: 34px 36px 21px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -21,6 +21,6 @@
     .popup__form{
         max-width: 238px;
         margin: 122px auto 0;
-        padding: 28px 22px 7px;
+        padding: 28px 22px 9px;
     }
 }
