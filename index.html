@@ -21,49 +21,43 @@
                 <button type="button" class="profile__add-button"></button>
             </section>
             <section class="items">
-                <div class="items__content">
-                    <img class="items__image" src="images/items/artem-maltsev-h31mHmLFX_A-unsplash.jpg" alt="Карелия">
-                    <h2 class="items__title">Карелия</h2>
-                    <button type="button" class="items__like-button"></button>
-                </div>
-                <div class="items__content">
-                    <img class="items__image" src="images/items/kirill-pershin-10884304-unsplash.jpg" alt="Карачаевск">
-                    <h2 class="items__title">Карачаевск</h2>
-                    <button type="button" class="items__like-button"></button>
-                </div>
-                <div class="items__content">
-                    <img class="items__image" src="images/items/kirill-pershin-LHtk2-rINmc-unsplash.jpg" alt="Зеленоград">
-                    <h2 class="items__title">Зеленоград</h2>
-                    <button type="button" class="items__like-button"></button>
-                </div>
-                <div class="items__content">
-                    <img class="items__image" src="images/items/pavel-anoshin-d3AFql-AGvc-unsplash.jpg" alt="Владивосток">
-                    <h2 class="items__title">Владивосток</h2>
-                    <button type="button" class="items__like-button"></button>
-                </div>
-                <div class="items__content">
-                    <img class="items__image" src="images/items/philipp-trubchenko-gdqLz1LFsxI-unsplash.jpg" alt="Байкал">
-                    <h2 class="items__title">Байкал</h2>
-                    <button type="button" class="items__like-button"></button>
-                </div>
-                <div class="items__content">
-                    <img class="items__image" src="images/items/vladimir-fedotov-GWggAB8uAlA-unsplash.jpg" alt="Коми">
-                    <h2 class="items__title">Коми</h2>
-                    <button type="button" class="items__like-button"></button>
-                </div>
+                <template id="items__template">
+                    <div class="items__content">
+                        <img class="items__image" src="" alt="">
+                        <button class="items__trash" type="button"></button>
+                        <h2 class="items__title"></h2>
+                        <button type="button" class="items__like-button"></button>
+                    </div>
+                </template>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup popup_profile-edit">
             <form name="info-user"  class="popup__form">
                 <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__input" type="text" placeholder="Имя" name="name" value="qwe">
                 <input class="popup__input" type="text" placeholder="О себе" name="discription" >
-                <button class="popup__save-button" type="submit">Сохранить</button>
+                <button class="popup__submit-button" type="submit">Сохранить</button>
             </form>
+        </div>
+        <div class="popup popup_items">
+            <form name="add-images"  class="popup__form">
+                <button type="button" class="popup__closed  "></button>
+                <h2 class="popup__title">Новое место</h2>
+                <input class="popup__input" type="text" placeholder="Название" name="name-item">
+                <input class="popup__input" type="text" placeholder="Ссылка на картинку" name="link">
+                <button class="popup__submit-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+        <div class="popup popup_over-img">
+            <div class="popup__container">
+                <img class="popup__image" src="">
+                <h2 class="popup__title_img"></h2>
+                <button type="button" class="popup__closed popup__closed_img_posisiton"></button>
+            </div>
         </div>
         <script src="scripts/main.js"></script>
     </body>
