@@ -116,7 +116,7 @@ function renderItems(value){
       popupImage.classList.add('popup_over-img_active');
       popupImage.querySelector('.popup__image').src = value.link;
       popupImage.querySelector('.popup__image').alt = value.name;
-      popupImage.querySelector('.popup__title_img').textContent = value.name;
+      popupImage.querySelector('.popup__title-img').textContent = value.name;
     });
 
     const popupImageClosed = popupImage.querySelector('.popup__closed');
