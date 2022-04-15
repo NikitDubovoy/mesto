@@ -87,7 +87,7 @@ closedItemsBtn.addEventListener('click', closedPopupItems);
 // render items
 function renderItems(value){
     const itemTemplate = document.querySelector('#items__template').content;
-    const itemElement = itemTemplate.querySelector('.items__content').cloneNode  (true);
+    const itemElement = itemTemplate.querySelector('.items__content').cloneNode(true);
 
     itemElement.querySelector('.items__image').src = value.link;
     itemElement.querySelector('.items__image').alt = value.name;
@@ -106,7 +106,7 @@ function renderItems(value){
       thisItem.remove();
     })
 
-    items.append(itemElement);
+    items.prepend(itemElement);
     
     const itemImage = itemElement.querySelector('.items__image');
     const popupImage = document.querySelector('.popup_over-img');
@@ -137,11 +137,12 @@ function addItems() {
     };
 
     if ((newItem.name != '') && (newItem.link != '')){
-      initialCards.push(newItem);
+      initialCards.unshift(newItem);
       closedPopupItems(event);
       renderItems(newItem);
+      console.log(initialCards);
     }
-    
+
     nameItem.value = '';
     linkImage.value = '';
 };
