@@ -102,7 +102,6 @@ function renderItems(value){
     const trashBtn = itemElement.querySelector('.items__trash');
     trashBtn.addEventListener('click', function(){
       const thisItem = trashBtn.closest('.items__content');
-      console.log(initialCards);
       initialCards.pop();
       thisItem.remove();
     })
@@ -118,7 +117,9 @@ function renderItems(value){
       popupImage.querySelector('.popup__image').src = value.link;
       popupImage.querySelector('.popup__title_img').textContent = value.name;
     });
+
     const popupImageClosed = popupImage.querySelector('.popup__closed_img_posisiton');
+
     popupImageClosed.addEventListener('click', function(event){
       event.preventDefault();
       popupImage.classList.remove('popup_over-img_active');
@@ -134,11 +135,11 @@ function addItems() {
       link:  linkImage.value,
     };
 
-    if ((linkImage != '') && (nameItem != '')){
+    if ((newItem.name != '') && (newItem.link != '')){
       initialCards.push(newItem);
-    };
-    closedPopupItems(event);
-    renderItems(newItem);
+      closedPopupItems(event);
+      renderItems(newItem);
+    }
     nameItem.value = '';
     linkImage.value = '';
 };
