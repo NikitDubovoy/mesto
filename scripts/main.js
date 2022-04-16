@@ -134,7 +134,10 @@ function renderItems(value){
 formItems.addEventListener('submit', function(event){
   event.preventDefault();
   initialCards.unshift({ name: nameItem.value, link: linkImage.value});
-  initialCards.shift(element => renderItems(element));
+  renderItems(initialCards.shift());
+  closedItemsBtn.addEventListener('click', function(){
+    closedPopup(popupItems, event);
+  });
 });
 
 
