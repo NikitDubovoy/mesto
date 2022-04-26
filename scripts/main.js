@@ -10,7 +10,7 @@ const userDescription = document.querySelector('.profile__description');
 const closedProfileBtn = popupProfileEdit.querySelector('.popup__closed');
 const formProfile = popupProfileEdit.querySelector('.popup__form');
 const popupItems = document.querySelector('.popup_items');
-const closedItemsBtn = popupItems.querySelector('.popup__closed');
+const itemCloseBtn = popupItems.querySelector('.popup__closed');
 const formItems = popupItems.querySelector('.popup__form');
 const addBtn = document.querySelector('.profile__add-button');
 const closedPopup = document.querySelector('.popup__closed');
@@ -55,9 +55,10 @@ editBtn.addEventListener('click', function(){
   openPopup(popupProfileEdit);
   nameInput.value = userName.textContent;
   discInput.value = userDescription.textContent;
-  closedPopup.addEventListener('click', function(){
-    closePopup(popupProfileEdit);
-  });
+});
+
+closedProfileBtn.addEventListener('click', function(){
+  closePopup(popupProfileEdit);
 });
   
 function saveProfile (event){
@@ -79,7 +80,7 @@ addBtn.addEventListener('click', function(){
 });
 // close popup item
 
-closedItemsBtn.addEventListener('click', function(){
+itemCloseBtn.addEventListener('click', function(){
   closePopup(popupItems);
 });
 
