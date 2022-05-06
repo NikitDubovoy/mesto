@@ -1,4 +1,5 @@
 const popupProfileEdit = document.querySelector('.popup_profile-edit');
+const popupForm = document.querySelector('.popup__form');
 const popupOpened = document.querySelector('.popap_opened');
 const editBtn = document.querySelector('.profile__edit-button');
 const nameInput = document.getElementsByName('name')[0];
@@ -17,6 +18,7 @@ const closedPopup = document.querySelector('.popup__closed');
 const popupOverImg = document.querySelector('.popup_over-img');
 const popupImageTitle = document.querySelector('.popup__title-img');  
 const popupImage = document.querySelector('.popup__image');
+const popupBtn = document.querySelector('.popup__button');
 const initialCards = [
     {
       name: 'Архыз',
@@ -44,21 +46,25 @@ const initialCards = [
     }
   ];
 
+nameInput.value = userName.textContent;
+discInput.value = userDescription.textContent;
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    closeEsc(popup);   
 };
+
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');    
+  popup.classList.remove('popup_opened'); 
 };
 
 editBtn.addEventListener('click', function(){ 
   openPopup(popupProfileEdit);
-  nameInput.value = userName.textContent;
-  discInput.value = userDescription.textContent;
 });
 
 closedProfileBtn.addEventListener('click', function(){
   closePopup(popupProfileEdit);
+  
 });
   
 function saveProfile (event){
@@ -134,3 +140,7 @@ formItems.addEventListener('submit', function(event){
     formItems.reset();
   };
 });
+
+
+
+

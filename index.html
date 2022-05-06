@@ -35,21 +35,25 @@
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
         <div class="popup popup_profile-edit">
-            <form name="info-user"  class="popup__form">
+            <form name="info-user"  class="popup__form" novalidate>
                 <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input" type="text" placeholder="Имя" name="name" value="qwe">
-                <input class="popup__input" type="text" placeholder="О себе" name="discription" >
-                <button class="popup__submit-button" type="submit">Сохранить</button>
+                <input class="popup__input" id="name-input" type="text" placeholder="Имя" name="name" maxlength="40" minlength="2" required>
+                <span class="popup__error_visible" id="name-input-error"></span>
+                <input class="popup__input" type="text" id="discription-input" placeholder="О себе" name="discription" maxlength="200" minlength="2" required>
+                <span class="popup__error_visible" id="discription-input-error"></span>
+                <button class="popup__button" type="submit" >Сохранить</button>
             </form>
         </div>
         <div class="popup popup_items">
-            <form name="add-images"  class="popup__form">
+            <form name="add-images"  class="popup__form" novalidate>
                 <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input" type="text" placeholder="Название" name="name-item">
-                <input class="popup__input" type="url" placeholder="Ссылка на картинку" name="link">
-                <button class="popup__submit-button" type="submit">Сохранить</button>
+                <input class="popup__input" type="text" id="title-input" placeholder="Название" name="name-item" maxlength="30" minlength="2" required>
+                <span class="popup__error_visible" id="title-input-error"></span>
+                <input class="popup__input" type="url" id="link-input" placeholder="Ссылка на картинку" name="link" required>
+                <span class="popup__error_visible" id="link-input-error" ></span>
+                <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
         <div class="popup popup_over-img">
@@ -60,5 +64,6 @@
             </div>
         </div>
         <script src="scripts/main.js"></script>
+        <script src="scripts/validate.js"></script>
     </body>
 </html>
