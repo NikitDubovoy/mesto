@@ -8,13 +8,12 @@ const nameItem = document.getElementsByName('name-item')[0];
 const linkImage = document.getElementsByName('link')[0];
 const userName = document.querySelector('.profile__name-user');
 const userDescription = document.querySelector('.profile__description');
-const closedProfileBtn = popupProfileEdit.querySelector('.popup__closed');
+const buttonCloseProfile = popupProfileEdit.querySelector('.popup__closed');
 const formProfile = popupProfileEdit.querySelector('.popup__form');
 const popupItems = document.querySelector('.popup_items');
 const itemCloseBtn = popupItems.querySelector('.popup__closed');
 const formItems = popupItems.querySelector('.popup__form');
 const addBtn = document.querySelector('.profile__add-button');
-const closedPopup = document.querySelector('.popup__closed');
 const popupOverImg = document.querySelector('.popup_over-img');
 const popupImageTitle = document.querySelector('.popup__title-img');  
 const popupImage = document.querySelector('.popup__image');
@@ -51,18 +50,19 @@ discInput.value = userDescription.textContent;
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    closeEsc(popup);   
+    document.addEventListener('keydown', closeEsc);    
 };
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opened'); 
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeEsc); 
 };
 
 editBtn.addEventListener('click', function(){ 
   openPopup(popupProfileEdit);
 });
 
-closedProfileBtn.addEventListener('click', function(){
+buttonCloseProfile.addEventListener('click', function(){
   closePopup(popupProfileEdit);
   
 });
@@ -115,10 +115,10 @@ function renderItems(value){
 
   itemImage.addEventListener('click', function(event){
     event.preventDefault();
-    openPopup(popupOverImg, event);
     popupImage.src = value.link;
     popupImage.alt = value.name;
     popupImageTitle.textContent = value.name;
+    openPopup(popupOverImg, event);
   });
 
 
@@ -141,6 +141,20 @@ formItems.addEventListener('submit', function(event){
   };
 });
 
+const closedOverlay = (event) => {
+  if (event.target === event.currentTarget){
+    closePopup(event.target);
+  }
+};
 
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
+popupList.forEach((element) => element.addEventListener('click', closedOverlay)); 
+
+function closeEsc(e){
+    if (e.key === 'Escape'){
+      popupList.forEach((element) => closePopup(element));
+    } 
+}
 
 

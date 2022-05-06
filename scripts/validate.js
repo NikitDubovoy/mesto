@@ -16,19 +16,6 @@ function checkInitValue(selector, form){
   })
 }
 
-function closeEsc(popup, e){
-  function detectPres(e){
-    if (e.keyCode === 27){
-      closePopup(popup);
-      document.removeEventListener('keydown', detectPres)
-    }
-  }
-  document.addEventListener('keydown', detectPres);
-  
-}
-
-
-
 function unlockButton(selector, form){
   const button = form.querySelector(selector.submitButtonSelector);
   button.disabled = !form.checkValidity();
@@ -61,12 +48,3 @@ enableValidation({
   errorClass: 'popup__error_visible'
 }); 
 
-const closedOverlay = (event) => {
-  if (event.target === event.currentTarget){
-    closePopup(event.target);
-  }
-};
-
-const popupList = Array.from(document.querySelectorAll('.popup'));
-
-popupList.forEach((element) => element.addEventListener('click', closedOverlay)); 
