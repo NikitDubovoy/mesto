@@ -99,15 +99,6 @@ function renderCard (itemImage, itemElement, value) {
   itemElement.querySelector('.items__title').textContent = value.name;
 }
 
-function openedImage (itemElement, value) {
-  itemImage.addEventListener('click', function(event){
-    event.preventDefault();
-    popupImage.src = value.link;
-    popupImage.alt = value.name;
-    popupImageTitle.textContent = value.name;
-    openPopup(popupOverImg, event);
-  });
-}
 
 function createCatd(value){ 
   const itemTemplate = document.querySelector('#items__template').content;
@@ -127,7 +118,13 @@ function createCatd(value){
     thisItem.remove();
   });
 
-  openedImage (itemImage, value);
+  itemImage.addEventListener('click', function(event){
+    event.preventDefault();
+    popupImage.src = value.link;
+    popupImage.alt = value.name;
+    popupImageTitle.textContent = value.name;
+    openPopup(popupOverImg, event);
+  });
 
   return itemElement;
 };
