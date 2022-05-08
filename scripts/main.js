@@ -19,6 +19,7 @@ const popupImageTitle = document.querySelector('.popup__title-img');
 const popupImage = document.querySelector('.popup__image');
 const popupBtn = document.querySelector('.popup__button');
 const items = document.querySelector('.items');
+const popupImageClosed = popupOverImg.querySelector('.popup__closed');
 
 const initialCards = [
     {
@@ -98,30 +99,13 @@ function renderCard (itemImage, itemElement, value) {
   itemElement.querySelector('.items__title').textContent = value.name;
 }
 
-function addLikeButton (itemsLikeBtn) {
-  itemsLikeBtn.addEventListener('click', function(event){
-    event.target.classList.toggle('items__like-button_active');
-  });
-}
-
-function addTrasherButton (trashBtn, thisItem) {
-   trashBtn.addEventListener('click', function(){
-    thisItem.remove();
-  });
-}
-
 function openedImage (itemElement, value) {
-  const itemImage = itemElement.querySelector('.items__image');
-  const popupImageClosed = popupOverImg.querySelector('.popup__closed');
   itemImage.addEventListener('click', function(event){
     event.preventDefault();
     popupImage.src = value.link;
     popupImage.alt = value.name;
     popupImageTitle.textContent = value.name;
     openPopup(popupOverImg, event);
-  });
-  popupImageClosed.addEventListener('click', function(){
-    closePopup(popupOverImg);
   });
 }
 
@@ -135,14 +119,22 @@ function createCatd(value){
 
   renderCard (itemImage, itemElement, value);
 
-  addLikeButton (itemsLikeBtn);
+  itemsLikeBtn.addEventListener('click', function(event){
+    event.target.classList.toggle('items__like-button_active');
+  });
 
-  addTrasherButton (trashBtn, thisItem);
+  trashBtn.addEventListener('click', function(){
+    thisItem.remove();
+  });
 
-  openedImage (itemElement, value);
+  openedImage (itemImage, value);
 
   return itemElement;
 };
+
+popupImageClosed.addEventListener('click', function(){
+  closePopup(popupOverImg);
+});
 
 initialCards.forEach(element => items.prepend(createCatd(element)));
 
