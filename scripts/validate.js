@@ -2,7 +2,7 @@ function enableValidation (selector){
   const formlist = Array.from(document.querySelectorAll(selector.formSelector));
   formlist.forEach((form) =>{
     form.addEventListener('input', (event) => handleFormInput(event, selector, form));
-    form.addEventListener('submit',() => handleFormSubmit(form));
+    //form.addEventListener('submit',() => handleFormSubmit(form));
     checkInitValue(selector, form);
   });
 }
@@ -20,10 +20,6 @@ function unlockButton(selector, form){
   const button = form.querySelector(selector.submitButtonSelector);
   button.disabled = !form.checkValidity();
   button.classList.toggle(selector.inactiveButtonClass, button.disabled);
-}
-
-function handleFormSubmit (form){
-  console.log(form.checkValidity());
 }
 
 function handleFormInput(event, selector, form){

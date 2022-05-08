@@ -98,64 +98,60 @@ function renderCard (itemImage, itemElement, value) {
   itemElement.querySelector('.items__title').textContent = value.name;
 }
 
-function addLikeButton (itemElement) {
-  const itemsLikeBtn = itemElement.querySelector('.items__like-button');
-
+function addLikeButton (itemsLikeBtn) {
   itemsLikeBtn.addEventListener('click', function(event){
     event.target.classList.toggle('items__like-button_active');
   });
 }
 
-function addTrasherButton (itemElement) {
-  const trashBtn = itemElement.querySelector('.items__trash');
-
-  trashBtn.addEventListener('click', function(){
-    const thisItem = trashBtn.closest('.items__content');
+function addTrasherButton (trashBtn, thisItem) {
+   trashBtn.addEventListener('click', function(){
     thisItem.remove();
   });
 }
 
 function openedImage (itemElement, value) {
   const itemImage = itemElement.querySelector('.items__image');
+  const popupImageClosed = popupOverImg.querySelector('.popup__closed');
   itemImage.addEventListener('click', function(event){
     event.preventDefault();
     popupImage.src = value.link;
     popupImage.alt = value.name;
     popupImageTitle.textContent = value.name;
     openPopup(popupOverImg, event);
-
-    const popupImageClosed = popupOverImg.querySelector('.popup__closed');
-
-    popupImageClosed.addEventListener('click', function(){
-      closePopup(popupOverImg);
-    });
+  });
+  popupImageClosed.addEventListener('click', function(){
+    closePopup(popupOverImg);
   });
 }
- 
+
 function createCatd(value){ 
   const itemTemplate = document.querySelector('#items__template').content;
   const itemElement = itemTemplate.querySelector('.items__content').cloneNode(true);
   const itemImage = itemElement.querySelector('.items__image');
+  const trashBtn = itemElement.querySelector('.items__trash');
+  const thisItem = trashBtn.closest('.items__content');
+  const itemsLikeBtn = itemElement.querySelector('.items__like-button');
 
   renderCard (itemImage, itemElement, value);
 
-  addLikeButton (itemElement);
+  addLikeButton (itemsLikeBtn);
 
-  addTrasherButton (itemElement);
+  addTrasherButton (trashBtn, thisItem);
 
   openedImage (itemElement, value);
 
-  items.prepend(itemElement);
-
+  return itemElement;
 };
 
-initialCards.forEach(element => createCatd(element));
+initialCards.forEach(element => items.prepend(createCatd(element)));
+
 
 formItems.addEventListener('submit', function(event){
   event.preventDefault();
   const newCard = { name: nameItem.value, link: linkImage.value};
   if (newCard.name && newCard.link){
-    createCatd(newCard);
+    items.prepend(createCatd(newCard));
     closePopup(popupItems);
     formItems.reset();
   };
