@@ -1,16 +1,14 @@
 export class FormValidator {
-    _selector;
     _form;
 
     constructor(selector, form){
         this._selector = selector;
         this._form = form;
+        this._submit = this._form.querySelector(this._selector.submitButtonSelector);
     }
      
     _unlockButton(){
-      const button = this._form.querySelector(this._selector.submitButtonSelector);
-      const form = this._form.querySelector(this._selector.formSelector);
-      button.disabled = !form.checkValidity();
+      this._submit.disabled = !this._form.checkValidity();
     }
 
     _handleFormInput(input){

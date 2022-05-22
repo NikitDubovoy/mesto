@@ -1,3 +1,6 @@
+import {openPopup} from './main.js';
+import {itemImage, titleImage} from './main.js';
+
 export class Card {
     _link;
     _name;
@@ -10,15 +13,9 @@ export class Card {
         this._templete = templete;
     }
 
-    _closeOverImageEsc = (e) => {
-        if (e.key === 'Escape'){
-            this._overImagePopup.classList.remove('popup_opened');
-        };
-        document.removeEventListener('keydown', this._closeOverImageEsc);
-    }
-
     _removeCard = () => {
         this._view.remove();
+        this._view = null;
     }
     
     _makeActiveLike = () => {
@@ -26,29 +23,31 @@ export class Card {
     }
 
     _openOverImage = () => {
-        this._overImagePopup.classList.add('popup_opened');
-        this._overImagePopup.querySelector('.popup__image').src = this._link;
-        this._overImagePopup.querySelector('.popup__title-img').textContent = this._name;
-        document.addEventListener('keydown',  this._closeOverImageEsc);
-        this._overImagePopup.querySelector('.popup__closed').addEventListener('click', () => {
-            document.removeEventListener('keydown', this._closeOverImageEsc)
-        } )
+        itemImage.src = this._link;
+        itemImage.alt = this._name;
+        titleImage.textContent = this._name;
     }
 
     getViewCard = () => { 
+        const overImagePopup = document.querySelector('.popup_over-img');
         this._view = this._templete.cloneNode(true).querySelector('.items__content');
-        this._view.querySelector('.items__image').src = this._link;
+        const itemImg = this._view.querySelector('.items__image');
+        itemImg.src = this._link;
+        itemImg.alt = this._name;
+
+        itemImg.addEventListener('click', () => {
+            openPopup(overImagePopup);
+            this._openOverImage();
+        });
+
         this._view.querySelector('.items__title').textContent = this._name;
         this._view.querySelector('.items__like-button').addEventListener('click', () => {
            this._makeActiveLike();
         })
+
         this._view.querySelector('.items__trash').addEventListener('click', () => {
             this._removeCard();
-        });
-        this._view.querySelector('.items__image').addEventListener('click', () => {
-            this._openOverImage();
-        })
-        
+        });     
         
         return this._view;
     }
