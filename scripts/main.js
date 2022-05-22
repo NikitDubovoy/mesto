@@ -20,6 +20,7 @@ const popupOverImg = document.querySelector('.popup_over-img');
 const popupImageClosed = popupOverImg.querySelector('.popup__closed');
 const itemImage = popupOverImg.querySelector('.popup__image');
 const titleImage = popupOverImg.querySelector('.popup__title-img');
+const itemCard = document.querySelector('.items');
 
 nameInput.value = userName.textContent;
 discInput.value = userDescription.textContent;
@@ -72,14 +73,15 @@ itemCloseBtn.addEventListener('click', function(){
 
 function addCard(item){
   const itemTemplate = document.querySelector('#items__template').content;
-
   const card = new Card(item.link, item.name, itemTemplate);
   const cardElement = card.getViewCard();
-  document.querySelector('.items').prepend(cardElement);
-
+  return cardElement;
 }
 
-initialCards.forEach((item) => addCard(item)); 
+//itemCard.prepend(cardElement);
+
+
+initialCards.forEach((item) => itemCard.prepend(addCard(item))); 
 
 popupImageClosed.addEventListener('click', function(){
   closePopup(popupOverImg);
@@ -91,7 +93,7 @@ formItems.addEventListener('submit', function(event){
     link: linkImage.value,
     name: nameItem.value
   }
-    addCard(inputValue);
+    itemCard.prepend(addCard((inputValue)));
     closePopup(popupItems);
     formItems.reset();
 });
