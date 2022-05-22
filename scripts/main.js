@@ -1,6 +1,7 @@
+import { Card } from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 const popupProfileEdit = document.querySelector('.popup_profile-edit');
-const popupForm = document.querySelector('.popup__form');
-const popupOpened = document.querySelector('.popap_opened');
 const editBtn = document.querySelector('.profile__edit-button');
 const nameInput = document.getElementsByName('name')[0];
 const discInput = document.getElementsByName('discription')[0];
@@ -15,10 +16,6 @@ const itemCloseBtn = popupItems.querySelector('.popup__closed');
 const formItems = popupItems.querySelector('.popup__form');
 const addBtn = document.querySelector('.profile__add-button');
 const popupOverImg = document.querySelector('.popup_over-img');
-const popupImageTitle = document.querySelector('.popup__title-img');  
-const popupImage = document.querySelector('.popup__image');
-const popupBtn = document.querySelector('.popup__button');
-const items = document.querySelector('.items');
 const popupImageClosed = popupOverImg.querySelector('.popup__closed');
 
 const initialCards = [
@@ -53,8 +50,10 @@ discInput.value = userDescription.textContent;
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeEsc);    
-};
+    document.addEventListener('keydown', closeEsc);
+    const formValidator = new FormValidator(selector, popup);
+    formValidator.checkValidionForm();
+}
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -81,69 +80,40 @@ function saveProfile (event){
 
 formProfile.addEventListener('submit', saveProfile);
 
-// open popup item
+
 addBtn.addEventListener('click', function(){
   openPopup(popupItems);
 });
 
-// close popup item
+
 itemCloseBtn.addEventListener('click', function(){
   closePopup(popupItems);
 });
 
-// render items
+const itemTemplate = document.querySelector('#items__template').content;
 
-function renderCard (itemImage, itemElement, value) {
-  itemImage.src = value.link;
-  itemImage.alt = value.name;
-  itemElement.querySelector('.items__title').textContent = value.name;
+function addCard(item){
+  const card = new Card(item.link, item.name, itemTemplate);
+  
+  const cardElement = card.getViewCard();
+  document.querySelector('.items').append(cardElement);
 }
 
-
-function createCatd(value){ 
-  const itemTemplate = document.querySelector('#items__template').content;
-  const itemElement = itemTemplate.querySelector('.items__content').cloneNode(true);
-  const itemImage = itemElement.querySelector('.items__image');
-  const trashBtn = itemElement.querySelector('.items__trash');
-  const thisItem = trashBtn.closest('.items__content');
-  const itemsLikeBtn = itemElement.querySelector('.items__like-button');
-
-  renderCard (itemImage, itemElement, value);
-
-  itemsLikeBtn.addEventListener('click', function(event){
-    event.target.classList.toggle('items__like-button_active');
-  });
-
-  trashBtn.addEventListener('click', function(){
-    thisItem.remove();
-  });
-
-  itemImage.addEventListener('click', function(event){
-    event.preventDefault();
-    popupImage.src = value.link;
-    popupImage.alt = value.name;
-    popupImageTitle.textContent = value.name;
-    openPopup(popupOverImg, event);
-  });
-
-  return itemElement;
-};
+initialCards.forEach((item) => addCard(item)); 
 
 popupImageClosed.addEventListener('click', function(){
   closePopup(popupOverImg);
 });
 
-initialCards.forEach(element => items.prepend(createCatd(element)));
-
-
 formItems.addEventListener('submit', function(event){
   event.preventDefault();
-  const newCard = { name: nameItem.value, link: linkImage.value};
-  if (newCard.name && newCard.link){
-    items.prepend(createCatd(newCard));
+  const inputValue = {
+    link: linkImage.value,
+    name: nameItem.value
+  }
+    addCard(inputValue);
     closePopup(popupItems);
     formItems.reset();
-  };
 });
 
 const closedOverlay = (event) => {
@@ -163,4 +133,11 @@ function closeEsc(e){
   }
 }
 
-
+const selector = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
