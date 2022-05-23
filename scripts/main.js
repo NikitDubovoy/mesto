@@ -21,13 +21,14 @@ const popupImageClosed = popupOverImg.querySelector('.popup__closed');
 const itemImage = popupOverImg.querySelector('.popup__image');
 const titleImage = popupOverImg.querySelector('.popup__title-img');
 const itemCard = document.querySelector('.items');
+const submitPopupItem = popupItems.querySelector(selector.submitButtonSelector);
+
 
 nameInput.value = userName.textContent;
 discInput.value = userDescription.textContent;
 
 
 export {itemImage, titleImage}
-
 
 export function openPopup(popup) {
         popup.classList.add('popup_opened');
@@ -59,27 +60,19 @@ function saveProfile (event){
 
 formProfile.addEventListener('submit', saveProfile);
 
-
 addBtn.addEventListener('click', function(){
   openPopup(popupItems);
 });
-
 
 itemCloseBtn.addEventListener('click', function(){
   closePopup(popupItems);
 });
 
-
-
 function addCard(item){
-  const itemTemplate = document.querySelector('#items__template').content;
-  const card = new Card(item.link, item.name, itemTemplate);
+  const card = new Card(item.link, item.name);
   const cardElement = card.getViewCard();
   return cardElement;
 }
-
-//itemCard.prepend(cardElement);
-
 
 initialCards.forEach((item) => itemCard.prepend(addCard(item))); 
 
@@ -96,9 +89,11 @@ formItems.addEventListener('submit', function(event){
     itemCard.prepend(addCard((inputValue)));
     closePopup(popupItems);
     formItems.reset();
+    submitPopupItem.disabled = true;
+    
 });
 
-const closedOverlay = (event) => {
+const closeOverlay = (event) => {
   if (event.target === event.currentTarget){
     closePopup(event.target);
   }
@@ -106,7 +101,7 @@ const closedOverlay = (event) => {
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
-popupList.forEach((element) => element.addEventListener('click', closedOverlay)); 
+popupList.forEach((element) => element.addEventListener('click', closeOverlay)); 
 
 function closeEsc(e){
   if (e.key === 'Escape'){
@@ -122,5 +117,5 @@ function validationForms (selector, form) {
   formValidator.checkValidionForm();
 }
 
-formList.forEach((form) => validationForms(selector, form, ));
+formList.forEach((form) => validationForms(selector, form));
 

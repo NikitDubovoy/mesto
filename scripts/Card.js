@@ -2,15 +2,11 @@ import {openPopup} from './main.js';
 import {itemImage, titleImage} from './main.js';
 
 export class Card {
-    _link;
-    _name;
-    _templete;
-    _overImagePopup = document.querySelector('.popup_over-img');
 
-    constructor (link, name, templete) {
+    constructor (link, name) {
         this._link = link;
         this._name = name;
-        this._templete = templete;
+        
     }
 
     _removeCard = () => {
@@ -30,7 +26,8 @@ export class Card {
 
     getViewCard = () => { 
         const overImagePopup = document.querySelector('.popup_over-img');
-        this._view = this._templete.cloneNode(true).querySelector('.items__content');
+        const templete = document.querySelector('#items__template').content;
+        this._view = templete.cloneNode(true).querySelector('.items__content');
         const itemImg = this._view.querySelector('.items__image');
         itemImg.src = this._link;
         itemImg.alt = this._name;
