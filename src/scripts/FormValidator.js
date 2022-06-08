@@ -16,7 +16,6 @@ export class FormValidator {
     }
 
     _unlockButton(){
-      console.log(this._form.checkValidity())
       this._submit.disabled = !this._form.checkValidity();
       this._submit.classList.toggle(this._selector.inactiveButtonClass, this._submit.disabled)
     }
@@ -38,9 +37,8 @@ export class FormValidator {
         input.addEventListener('input', () => 
           this._handleFormInput(input));
           this._checkInitValue();
-      });
-      
+          this._unlockButton();
+      });     
     }
-
 }
 

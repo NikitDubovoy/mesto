@@ -3,17 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./page/index.css">
         <title>Mesto</title>
       </head>
     <body class="page">
         <header class="header">
-            <img src="images/logo.svg" class="header__logo" alt="Логотип">
+            <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="Логотип">
         </header>
         <main class="main">
             <section class="profile">
                 <div class="profile__info">
-                    <img class="profile__avatar" src="images/Avatar.jpg" alt="Аватар">
+                    <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватар">
                     <h1 class="profile__name-user">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button"></button>
                     <p class="profile__description">Исследователь океана</p>
@@ -63,6 +62,5 @@
                 <button type="button" class="popup__closed"></button>
             </div>
         </div>
-        <script src="scripts/main.js" type="module"></script>
     </body>
 </html>
