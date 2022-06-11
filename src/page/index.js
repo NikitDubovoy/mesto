@@ -28,8 +28,6 @@ addCard.renderItems()
 
 const userInfo = new UserInfo({name: config.userName, description: config.userDescription})
 
-const userInfoValue = userInfo.getUserInfo()
-
 const popupProfileForm = new PopupWithForm({
     submit: (data) => {
     userInfo.setUserInfo(data.name, data.discription);
@@ -40,8 +38,8 @@ const popupProfileForm = new PopupWithForm({
 popupProfileForm.setEventListeners();
 
 config.editBtn.addEventListener('click', () => {
-  config.nameInput.value = userInfoValue.name;
-  config.discInput.value = userInfoValue.description; 
+  config.nameInput.value = userInfo.getUserInfo().name;
+  config.discInput.value = userInfo.getUserInfo().description;
   popupProfileForm.open();
 });
 

@@ -4,7 +4,6 @@ export class UserInfo {
     constructor(profile){
         this._name = profile.name;
         this._description = profile.description;
-        this.profile = profile;
     }
 
     getUserInfo() {
