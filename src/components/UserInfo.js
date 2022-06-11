@@ -4,6 +4,7 @@ export class UserInfo {
     constructor(profile){
         this._name = profile.name;
         this._description = profile.description;
+        this.profile = profile;
     }
 
     getUserInfo() {
@@ -12,10 +13,9 @@ export class UserInfo {
             description: this._description.textContent
         } 
     }
-    setUserInfo(userName, userDescription, e) {
-        e.preventDefault();
-        this._name.textContent = userName.value;
-        this._description.textContent = userDescription.value; 
+    setUserInfo(userName, userDesc) {
+        this._name.textContent = userName;
+        this._description.textContent = userDesc; 
     }
 }
     

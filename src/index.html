@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./page/index.css">
         <title>Mesto</title>
       </head>
     <body class="page">
@@ -41,18 +42,18 @@
                 <span class="popup__error popup__error_visible" id="name-input-error"></span>
                 <input class="popup__input" type="text" id="discription-input" placeholder="О себе" name="discription" maxlength="200" minlength="2" required>
                 <span class="popup__error popup__error_visible" id="discription-input-error"></span>
-                <button class="popup__button" type="submit" >Сохранить</button>
+                <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
-        <div class="popup popup_items">
-            <form name="add-images"  class="popup__form" novalidate>
+        <div class="popup popup__items">
+            <form name="add-images"  class="popup__form popup__form" novalidate>
                 <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input" type="text" id="title-input" placeholder="Название" name="name-item" maxlength="30" minlength="2" required>
+                <input class="popup__input" type="text" id="title-input" placeholder="Название" name="name" maxlength="30" minlength="2" required>
                 <span class="popup__error popup__error_visible" id="title-input-error"></span>
                 <input class="popup__input" type="url" id="link-input" placeholder="Ссылка на картинку" name="link" required>
                 <span class="popup__error popup__error_visible" id="link-input-error" ></span>
-                <button class="popup__button" type="submit" >Сохранить</button>
+                <button class="popup__button" type="submit" disabled>Сохранить</button>
             </form>
         </div>
         <div class="popup popup_over-img">
@@ -62,5 +63,6 @@
                 <button type="button" class="popup__closed"></button>
             </div>
         </div>
+        <script src="scripts/main.js" type="module"></script>
     </body>
 </html>

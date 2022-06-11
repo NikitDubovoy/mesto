@@ -1,23 +1,24 @@
 export class FormValidator {
 
-    constructor(selector, form){
+    constructor(selector, popupSelector){
         this._selector = selector;
-        this._form = form;
-        this._submit = this._form.querySelector(this._selector.submitButtonSelector);
+        this._popup = document.querySelector(popupSelector)
+        this._form = this._popup.querySelector('.popup__form');
+        this._buttonSubmit = this._form.querySelector(this._selector.submitButtonSelector);
     }
      
-    _checkInitValue() {
+/*     _checkInitValue() {
       const inputs = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
       inputs.forEach((element) =>{
         if (!element.value){
           this._unlockButton()
         }
       })
-    }
+    } */
 
     _unlockButton(){
-      this._submit.disabled = !this._form.checkValidity();
-      this._submit.classList.toggle(this._selector.inactiveButtonClass, this._submit.disabled)
+      this._buttonSubmit.disabled = !this._form.checkValidity();
+      this._buttonSubmit.classList.toggle(this._selector.inactiveButtonClass, this._buttonSubmit.disabled)
     }
 
     _handleFormInput(input){
@@ -36,8 +37,6 @@ export class FormValidator {
       inputList.forEach((input) =>{
         input.addEventListener('input', () => 
           this._handleFormInput(input));
-          this._checkInitValue();
-          this._unlockButton();
       });     
     }
 }

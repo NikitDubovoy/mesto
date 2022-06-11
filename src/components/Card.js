@@ -11,7 +11,7 @@ export class Card{
 
     _handleCardClick () {
         this._itemImg.addEventListener('click', () => {
-            this._overImg.open()
+            this._overImg.open(this._link, this._name)
         })
         this._buttonClosed.addEventListener('click', () =>{
             this._overImg.setEventListeners();
