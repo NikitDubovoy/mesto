@@ -1,21 +1,13 @@
 /* import {openPopup} from './main.js';
 import {itemImage, titleImage} from './main.js'; */
 
-export class Card{
+export class Card {
 
-    constructor (overImg, link, name) {
-        this._overImg = overImg;
+    constructor (handleCardClick, link, name, temlateItem) {
+        this._temlateItem = temlateItem;
+        this._handleCardClick = handleCardClick;
         this._link = link;
         this._name = name;
-    }
-
-    _handleCardClick () {
-        this._itemImg.addEventListener('click', () => {
-            this._overImg.open(this._link, this._name)
-        })
-        this._buttonClosed.addEventListener('click', () =>{
-            this._overImg.setEventListeners();
-        })
     }
 
     _removeCard = () => {
@@ -29,9 +21,7 @@ export class Card{
 
 
     getViewCard = () => { 
-        this._overImagePopup = document.querySelector('.popup_over-img');
-        this._buttonClosed = this._overImagePopup.querySelector('.popup__closed');
-        const templete = document.querySelector('#items__template').content;
+        const templete = document.querySelector(this._temlateItem).content;
         this._view = templete.cloneNode(true).querySelector('.items__content');
         this._itemImg = this._view.querySelector('.items__image');
         this._itemImg.src = this._link;
@@ -46,7 +36,8 @@ export class Card{
         this._view.querySelector('.items__trash').addEventListener('click', () => {
             this._removeCard();
         }); 
-        this._handleCardClick ()
+
+        this._itemImg.addEventListener('click',  this._handleCardClick);
 
         return this._view;
     }

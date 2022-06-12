@@ -5,10 +5,10 @@ export class Section {
         this._container = document.querySelector(containerSelector);
     }
     renderItems() {
-        this._renderedItems.forEach((item) => this._container.prepend(this._renderer(item)));
+        this._renderedItems.forEach((item) => this._renderer(item));
+
     }
     addItem(element) {
-        this._container.prepend(this._renderer(element)) 
-        console.log(element)
+        this._container.prepend(element) 
     }
 }

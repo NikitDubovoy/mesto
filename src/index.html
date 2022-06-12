@@ -34,7 +34,7 @@
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
         <div class="popup popup_profile-edit">
-            <form name="info-user"  class="popup__form" novalidate>
+            <form name="info-user"  class="popup__form popup__form_user" novalidate>
                 <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__input name-input" id="name-input" type="text" placeholder="Имя" name="name" maxlength="40" minlength="2" required>
@@ -45,7 +45,7 @@
             </form>
         </div>
         <div class="popup popup_items">
-            <form name="add-images"  class="popup__form popup__form" novalidate>
+            <form name="add-images"  class="popup__form popup__form_item" novalidate>
                 <button type="button" class="popup__closed"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <input class="popup__input" type="text" id="title-input" placeholder="Название" name="name" maxlength="30" minlength="2" required>

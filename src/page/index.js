@@ -1,32 +1,42 @@
 import { Card } from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
-import * as config from '../components/config.js';
+import * as config from '../utils/config.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {Section} from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import './index.css';
 
-const profileValidation = new FormValidator(config.selector, config.popupProfileEdit);
-const newCardValidation = new FormValidator(config.selector, config.popupItems);
+const profileValidation = new FormValidator(config.selector, config.formProfile);
+const newCardValidation = new FormValidator(config.selector, config.formItems);
 profileValidation.checkValidionForm();
 newCardValidation.checkValidionForm();  
 
-const openPopupImage = new PopupWithImage(config.popupOverImg);
+const popupImage = new PopupWithImage(config.popupOverImg);
 
-const addCard = new Section({
+function createCard(item)
+ {
+  const card = new Card(() => {popupImage.open(item.link, item.name)}, item.link, item.name, config.template);
+  const cardLayout = card.getViewCard(); 
+  return cardLayout;
+ }  
+
+const cardElement = new Section({
  items: config.initialCards,
  renderer: (item) => {
-  const card = new Card(openPopupImage, item.link, item.name);
-  const cardElement = card.getViewCard(); 
-  return cardElement;
+  cardElement.addItem(createCard(item))
   }, 
 },
 config.itemCard)
 
-addCard.renderItems()
+cardElement.renderItems()
+
+popupImage.setEventListeners();
+
 
 const userInfo = new UserInfo({name: config.userName, description: config.userDescription})
+
+const userProfile = userInfo.getUserInfo();
 
 const popupProfileForm = new PopupWithForm({
     submit: (data) => {
@@ -37,15 +47,17 @@ const popupProfileForm = new PopupWithForm({
 
 popupProfileForm.setEventListeners();
 
+
+
 config.editBtn.addEventListener('click', () => {
-  config.nameInput.value = userInfo.getUserInfo().name;
-  config.discInput.value = userInfo.getUserInfo().description;
+  config.nameInput.value = userProfile.name;
+  config.discInput.value = userProfile.description;
   popupProfileForm.open();
 });
 
 const popupItemForm = new PopupWithForm({
   submit: (data) =>{
-    addCard.addItem(data); 
+    cardElement.addItem(createCard(data)); 
     popupItemForm.close();
   }
 }, config.popupItems)

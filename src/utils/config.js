@@ -35,15 +35,16 @@ export const initialCards = [
       }
     ];
 export const popupProfileEdit = '.popup_profile-edit';
-export const popup = '.popup'
+export const template = '#items__template';
+export const popup = '.popup';
 export const editBtn = document.querySelector('.profile__edit-button');
 export const nameInput = document.querySelector('.name-input');
 export const discInput = document.querySelector('.discription-input');
-export const userName = document.querySelector('.profile__name-user');
-export const userDescription = document.querySelector('.profile__description');
-export const formProfile = '.popup__form';
+export const userName = '.profile__name-user';
+export const userDescription = '.profile__description';
+export const formProfile = '.popup__form_user';
 export const popupItems = '.popup_items';
-export const formItems = '.popup__form';
+export const formItems = '.popup__form_item';
 export const addBtn = document.querySelector('.profile__add-button');
 export const popupOverImg = '.popup_over-img';
 //export const titleImage = popupOverImg.querySelector('.popup__title-img');
