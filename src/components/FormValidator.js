@@ -1,20 +1,11 @@
 export class FormValidator {
 
-    constructor(selector, formSelector){
+    constructor(selector, form){
         this._selector = selector;
-        this._form = document.querySelector(formSelector)
-        //this._form = this._popup.querySelector('.popup__form');
+        this._form = form;
         this._buttonSubmit = this._form.querySelector(this._selector.submitButtonSelector);
-    }
-     
-/*     _checkInitValue() {
-      const inputs = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
-      inputs.forEach((element) =>{
-        if (!element.value){
-          this._unlockButton()
-        }
-      })
-    } */
+        console.log(this._form)
+      }
 
     _unlockButton(){
       this._buttonSubmit.disabled = !this._form.checkValidity();

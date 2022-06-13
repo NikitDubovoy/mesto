@@ -36,8 +36,6 @@ popupImage.setEventListeners();
 
 const userInfo = new UserInfo({name: config.userName, description: config.userDescription})
 
-const userProfile = userInfo.getUserInfo();
-
 const popupProfileForm = new PopupWithForm({
     submit: (data) => {
     userInfo.setUserInfo(data.name, data.discription);
@@ -50,6 +48,7 @@ popupProfileForm.setEventListeners();
 
 
 config.editBtn.addEventListener('click', () => {
+  const userProfile = userInfo.getUserInfo();
   config.nameInput.value = userProfile.name;
   config.discInput.value = userProfile.description;
   popupProfileForm.open();
