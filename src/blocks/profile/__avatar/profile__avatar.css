@@ -1,9 +1,0 @@
-.profile__avatar {
-    border-radius: 50%;
-    grid-area: avatar;
-}
-@media screen and (max-width: 730px){
-    .profile__avatar{
-        margin-bottom: 27px;
-    }
-}
