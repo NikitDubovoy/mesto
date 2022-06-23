@@ -4,7 +4,6 @@ export class FormValidator {
         this._selector = selector;
         this._form = form;
         this._buttonSubmit = this._form.querySelector(this._selector.submitButtonSelector);
-        console.log(this._form)
       }
 
     _unlockButton(){
