@@ -10,3 +10,10 @@
 .items:last-child{
     justify-content: start; 
 }
+
+@media screen and (max-width: 730px){
+    .items{
+        flex-direction: column;
+        align-content: center;
+    }
+}
