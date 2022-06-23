@@ -1,6 +1,6 @@
 export class Card {
 
-    constructor (handleCardClick, link, name, temlateItem, likes, cardId, userId, handleLikeClick, ownerId, popup) {
+    constructor (handleCardClick, link, name, temlateItem, likes, cardId, userId, handleLikeClick, ownerId, cardDeleted) {
         this._temlateItem = temlateItem;
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
@@ -10,7 +10,7 @@ export class Card {
         this._cardId = cardId;
         this._userId = userId;
         this._ownerId = ownerId;
-        this._popup = popup;
+        this._cardDeleted = cardDeleted;
     }
 
     removeCard = () => {
@@ -34,33 +34,38 @@ export class Card {
         })
       }
 
-    isCard() {
+    _isCard() {
         if (this._ownerId != this._userId) {
             this._view.querySelector('.items__trash').classList.add('items__trash_no-visible')
         }
     }
 
-    getViewCard = () => { 
+    _generateCard () {
         const templete = document.querySelector(this._temlateItem).content;
         this._view = templete.cloneNode(true).querySelector('.items__content');
         this._itemImg = this._view.querySelector('.items__image');
-        this.isCard()
         this._itemImg.src = this._link;
         this._itemImg.alt = this._name;
-        this.getLikesLength (this.likes);
-        
         this._view.querySelector('.items__title').textContent = this._name;
+        return
+    }
+
+    getViewCard = () => { 
+        this._generateCard()
+        
         this._view.querySelector('.items__like-button').addEventListener('click', () => { 
             this._handleLikeClick(this._cardId);
         })
+
         this.makeActiveLike(this.isLiked());
+        
         this._view.querySelector('.items__trash').addEventListener('click', () => {
-            this._popup.open();
-            this._popup.setEventListeners(this._cardId);
+            this._cardDeleted(this._cardId);
         }); 
 
         this._itemImg.addEventListener('click',  this._handleCardClick);
-
+        this._isCard();
+        this.getLikesLength (this.likes);
         return this._view;
     }
     

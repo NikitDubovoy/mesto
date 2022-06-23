@@ -12,8 +12,4 @@ export class PopupWithImage extends Popup{
         this._image.alt = name;
         this._title.textContent = name;
     }
-    close(){
-        super.close();
-    }
-
 }

@@ -14,7 +14,4 @@ export class PopupWithConfirmation extends Popup {
             this._submit(id)
         });
     }
-    close() {
-        super.close();
-    }
 }

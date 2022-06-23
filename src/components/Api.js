@@ -1,19 +1,24 @@
 export class Api {
-    constructor(options) {
-
+    constructor(url, token) {
+        this._url = url,
+        this._token = token
     }
-  
+    
+    _isApi (data) {
+        if (data.ok){
+            return data.json()
+        }
+        return Promise.reject('Error')
+    }
+
     getInitialCards() {
-    return  fetch('https://mesto.nomoreparties.co/v1/cohort-43/cards',  
+    return  fetch(`${this._url}/cards`,  
        { headers: {
-        authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+        authorization: this._token,
         'Content-Type': 'application/json'
       }})
             .then((res) => {
-                if (res.ok){
-                    return res.json()
-                }
-                return Promise.reject('Error')
+                return this._isApi(res)
             })         
             .catch((err) => {
                 console.log(err); // выведем ошибку в консоль
@@ -24,11 +29,11 @@ export class Api {
             name: card.name,
             link: card.link,
         }
-        return  fetch('https://mesto.nomoreparties.co/v1/cohort-43/cards',  
+        return  fetch(`${this._url}/cards`,  
         {
         method: 'POST', 
         headers: {
-            authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+            authorization: this._token,
             'Content-Type': 'application/json'
             },
         body: JSON.stringify(body)
@@ -41,58 +46,63 @@ export class Api {
     }
     
     deletedCard(cardId) {
-        return  fetch(`https://mesto.nomoreparties.co/v1/cohort-43/cards/${cardId}`,  
+        return  fetch(`${this._url}/cards/${cardId}`,  
         {
         method: 'DELETE', 
         headers: {
-            authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+            authorization: this._token,
             'Content-Type': 'application/json'
             },
         })
     }
     
     putLike(id) {
-        return  fetch(`https://mesto.nomoreparties.co/v1/cohort-43/cards/${id}/likes`,  
+        return  fetch(`${this._url}/cards/${id}/likes`,  
         {
         method: 'PUT', 
         headers: {
-            authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+            authorization: this._token,
             'Content-Type': 'application/json'
             },
         })
         .then((res) => {
-            return res.json();
+            return this._isApi(res);
          })
+         .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+        }); 
+
     }
     deleteLike(id) {
-        return  fetch(`https://mesto.nomoreparties.co/v1/cohort-43/cards/${id}/likes`,  
+        return  fetch(`${this._url}/cards/${id}/likes`,  
         {
         method: 'DELETE', 
         headers: {
-            authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+            authorization: this._token,
             'Content-Type': 'application/json'
             },
         })
         .then((res) => {
-            return res.json();
+            return this._isApi(res);
          })
+         .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+        }); 
+
     }           
     
     getUser() {
-        return  fetch('https://mesto.nomoreparties.co/v1/cohort-43/users/me',  
+        return  fetch(`${this._url}/users/me`,  
         { headers: {
-         authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+         authorization: this._token,
          'Content-Type': 'application/json'
-       }})
-             .then((res) => {
-                 if (res.ok){
-                     return res.json()
-                 }
-                 return Promise.reject('Error')
-             })         
-             .catch((err) => {
-                 console.log(err); // выведем ошибку в консоль
-                 }); 
+         }})
+        .then((res) => {
+            return this._isApi(res);
+        })         
+        .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+        }); 
 
     }
     editUser(user) {
@@ -100,10 +110,10 @@ export class Api {
             name: user.name,
             about: user.about
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-43/users/me', {
+        return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: {
-                authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+                authorization: this._token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
@@ -115,10 +125,10 @@ export class Api {
         const body = {
             avatar: avatar
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-43/users/me/avatar', {
+        return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
-                authorization: '5d158af5-4ee3-4978-967e-9b9c8d1b1d67',
+                authorization: this._token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)

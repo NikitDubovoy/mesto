@@ -6,7 +6,7 @@ export class FormValidator {
         this._buttonSubmit = this._form.querySelector(this._selector.submitButtonSelector);
       }
 
-    _unlockButton(){
+    unlockButton(){
       this._buttonSubmit.disabled = !this._form.checkValidity();
       this._buttonSubmit.classList.toggle(this._selector.inactiveButtonClass, this._buttonSubmit.disabled)
     }
@@ -19,7 +19,7 @@ export class FormValidator {
         error.textContent = '';
       }
       input.classList.toggle(this._selector.inputErrorClass, !input.validity.valid);
-      this._unlockButton();
+      this.unlockButton();
     }
 
     checkValidionForm(){
@@ -27,7 +27,9 @@ export class FormValidator {
       inputList.forEach((input) =>{
         input.addEventListener('input', () => 
           this._handleFormInput(input));
-      });     
+          
+      });
     }
+    
 }
 

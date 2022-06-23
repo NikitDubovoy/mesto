@@ -56,3 +56,5 @@ export const formAvatarUpdate =  document.querySelector('.popup__form_update-ava
 export const popupAvatarUpdate = '.popup_update-avatar';
 export const formVerification = document.querySelector('.popup_verification')
 export const popupVerificationSelector = '.popup_verification';
+export const url = 'https://mesto.nomoreparties.co/v1/cohort-43';
+export const token = '5d158af5-4ee3-4978-967e-9b9c8d1b1d67';
