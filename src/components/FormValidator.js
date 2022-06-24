@@ -23,8 +23,8 @@ export class FormValidator {
     }
 
     checkValidionForm(){
-      const inputList = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
-      inputList.forEach((input) =>{
+      this._inputList = Array.from(this._form.querySelectorAll(this._selector.inputSelector));
+      this._inputList.forEach((input) =>{
         input.addEventListener('input', () => 
           this._handleFormInput(input));
           

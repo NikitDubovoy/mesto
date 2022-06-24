@@ -4,7 +4,7 @@ export class Api {
         this._token = token
     }
     
-    _isApi (data) {
+    _getResponseData(data) {
         if (data.ok){
             return data.json()
         }
@@ -18,12 +18,9 @@ export class Api {
         'Content-Type': 'application/json'
       }})
             .then((res) => {
-                return this._isApi(res)
+                return this._getResponseData(res)
             })         
-            .catch((err) => {
-                console.log(err); // выведем ошибку в консоль
-                }); 
-            }
+    }
     addCard(card){
         const body = {
             name: card.name,
@@ -41,8 +38,6 @@ export class Api {
         .then((res) => {
            return res.json();
         })
-
-
     }
     
     deletedCard(cardId) {
@@ -66,11 +61,8 @@ export class Api {
             },
         })
         .then((res) => {
-            return this._isApi(res);
+            return this._getResponseData(res);
          })
-         .catch((err) => {
-            console.log(err); // выведем ошибку в консоль
-        }); 
 
     }
     deleteLike(id) {
@@ -83,11 +75,8 @@ export class Api {
             },
         })
         .then((res) => {
-            return this._isApi(res);
+            return this._getResponseData(res);
          })
-         .catch((err) => {
-            console.log(err); // выведем ошибку в консоль
-        }); 
 
     }           
     
@@ -98,11 +87,8 @@ export class Api {
          'Content-Type': 'application/json'
          }})
         .then((res) => {
-            return this._isApi(res);
+            return this._getResponseData(res);
         })         
-        .catch((err) => {
-            console.log(err); // выведем ошибку в консоль
-        }); 
 
     }
     editUser(user) {

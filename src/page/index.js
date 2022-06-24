@@ -60,6 +60,9 @@ Promise.all([
     userInfo.setUserInfo(dataUser.name, dataUser.about);
     userInfo.setAvatar(dataUser.avatar)
     })
+    .catch((err) => {
+      console.log(err);
+    })
     .then(() => {
       const popupAvatar = new PopupWithForm({
         submit: (data) => {
@@ -86,16 +89,19 @@ Promise.all([
     })
     .catch((err) => {
       console.log(err);
-    }); 
-
-    config.editBtn.addEventListener('click', () => {
-      const userProfile = userInfo.getUserInfo();
-      config.nameInput.value = userProfile.name;
-      config.discInput.value = userProfile.description;
-      profileValidation.unlockButton()
-      popupProfileForm.open();
-    });
-
+    })
+    .then(() => {
+        config.editBtn.addEventListener('click', () => {
+          const userProfile = userInfo.getUserInfo();
+          config.nameInput.value = userProfile.name;
+          config.discInput.value = userProfile.description;
+          profileValidation.unlockButton()
+          popupProfileForm.open();
+        }); 
+    })
+    .catch((err) => {
+      console.log(err)
+    })
     api.getInitialCards()
     .then((data) => {
       
@@ -106,12 +112,16 @@ Promise.all([
           submit: (id) => {
             api.deletedCard(id)
             .then(() => {
+
             })
             .catch((err) => {
               console.log(err);
-            }); 
-            popupWithConfirmation.close();
-            card.removeCard()
+            })
+            .finally((id) => {
+              popupWithConfirmation.close();
+              card.removeCard()
+            })
+            
           }
         }, config.popupVerificationSelector);
       
@@ -130,7 +140,6 @@ Promise.all([
       item.owner._id,
       cardDeleted
       );
-      /* console.log(item) */
 
       function cardDeleted (id) {
         popupWithConfirmation.open();
