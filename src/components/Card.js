@@ -52,7 +52,6 @@ export class Card {
 
     getViewCard = () => { 
         this._generateCard()
-        
         this._view.querySelector('.items__like-button').addEventListener('click', () => { 
             this._handleLikeClick(this._cardId);
         })

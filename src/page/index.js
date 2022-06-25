@@ -48,177 +48,151 @@ const popupProfileForm = new PopupWithForm({
 
       popupProfileForm.setEventListeners();
 
-Promise.all([
-  api.getUser(),
-  api.getInitialCards()
-])
-.then(() => {
+function createCard(item)
+    {
 
-    api.getUser()
-    .then((dataUser) =>{
-    userInfo.setUserId(dataUser._id);
-    userInfo.setUserInfo(dataUser.name, dataUser.about);
-    userInfo.setAvatar(dataUser.avatar)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .then(() => {
-      const popupAvatar = new PopupWithForm({
-        submit: (data) => {
-          popupAvatar.renderLoading(true)
-          userInfo.setAvatar(data.avatar);
-          api.editAvatar(data.avatar)
-          .then(() => {
-            popupAvatar.close()
-          })
-          .finally(() => {
-            popupAvatar.renderLoading(false);
-          });
-          
-        }
-      },config.popupAvatarUpdate);
+    const card = new Card(() =>
       
-      popupAvatar.setEventListeners();
-      
-      config.avatar.addEventListener('click', () => {
-        updateAvatarValidation.unlockButton();
-        popupAvatar.open();
-      }) 
-      
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .then(() => {
-        config.editBtn.addEventListener('click', () => {
-          const userProfile = userInfo.getUserInfo();
-          config.nameInput.value = userProfile.name;
-          config.discInput.value = userProfile.description;
-          profileValidation.unlockButton()
-          popupProfileForm.open();
-        }); 
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    api.getInitialCards()
-    .then((data) => {
-      
-      function createCard(item)
-      {
-
-        const popupWithConfirmation = new PopupWithConfirmation({
-          submit: (id) => {
-            api.deletedCard(id)
-            .then(() => {
-
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-            .finally((id) => {
-              popupWithConfirmation.close();
-              card.removeCard()
-            })
-            
-          }
-        }, config.popupVerificationSelector);
-      
-        
-        
-      const card = new Card(() =>
-        
-      {popupImage.open(item.link, item.name)},
+    {popupImage.open(item.link, item.name)},
       item.link, 
       item.name, 
       config.template,
       item.likes,
-      item._id,
+      item._id, 
       userInfo.getUserId(),
       handleLikeClick, 
       item.owner._id,
       cardDeleted
-      );
+    );
+    
+    const cardLayout = card.getViewCard();
+    
+    function cardDeleted (id) {
+      console.log(id)
+      popupWithConfirmation.open();
+      popupWithConfirmation.setEventListeners(id)
+    }
 
-      function cardDeleted (id) {
-        popupWithConfirmation.open();
-        popupWithConfirmation.setEventListeners(id)
-      }
-
-      function handleLikeClick(id){
-        
-        if (!card.isLiked()){
-          api.putLike(id)
-          .then((res) => { 
-          card.likes = res.likes
-          card.getLikesLength(res.likes)
-          card.makeActiveLike(card.isLiked())
-          })
-          .catch((err) => {
-          console.log(err);
-          }); 
-        } 
-        else {
-          api.deleteLike(id)
-          .then((res) => { 
-            card.getLikesLength(res.likes)
-            card.makeActiveLike(!card.isLiked())
-            card.likes = res.likes
-          })
-          .catch((err) => {
-            console.log(err);
-          }); 
-        }
-      }
+    function handleLikeClick(id){
       
-      const cardLayout = card.getViewCard();
-      return cardLayout;
-      }  
+      if (!card.isLiked()){
+        api.putLike(id)
+        .then((res) => { 
+        card.likes = res.likes
+        card.getLikesLength(res.likes)
+        card.makeActiveLike(card.isLiked())
+        })
+        .catch((err) => {
+        console.log(err);
+        }); 
+      } 
+      else {
+        api.deleteLike(id)
+        .then((res) => { 
+          card.getLikesLength(res.likes)
+          card.makeActiveLike(!card.isLiked())
+          card.likes = res.likes
+        })  
+        .catch((err) => {
+          console.log(err);
+        }); 
+      }
+    }
+    
+    const popupWithConfirmation = new PopupWithConfirmation({
+      submit: (id) => {
+        api.deletedCard(id)
+        .then(() => {
 
-        const cardElement = new Section({
-          items: data.reverse(),
-          renderer: (item) => {
-            cardElement.addItem(createCard(item))
-            }, 
-        }, config.itemCard)
-
-        cardElement.renderItems();
-
-        const popupItemForm = new PopupWithForm({
-          submit: (data) =>{
-            popupItemForm.renderLoading(true)
-            api.addCard(data)
-            .then((res) => {
-              cardElement.addItem(createCard(res));
-              popupItemForm.close();
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-            .finally(() => {
-              popupItemForm.renderLoading(false)
-            })
-          
-
-          }
-        }, config.popupItems)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          card.removeCard()
+          popupWithConfirmation.close();
+        })      
         
-        config.addBtn.addEventListener('click', () => {
-          newCardValidation.unlockButton()
-          popupItemForm.open();
-        } )
-        
-        popupItemForm.setEventListeners();
+      }
+    }, config.popupVerificationSelector); 
 
-    }) 
-    .catch((err) => {
-      console.log(err)
+    return cardLayout;
+    } 
+
+config.editBtn.addEventListener('click', () => {
+  const userProfile = userInfo.getUserInfo();
+  config.nameInput.value = userProfile.name;
+  config.discInput.value = userProfile.description;
+  profileValidation.unlockButton()
+  popupProfileForm.open();
+}); 
+  
+const popupAvatar = new PopupWithForm({
+  submit: (data) => {
+    popupAvatar.renderLoading(true)
+    userInfo.setAvatar(data.avatar);
+    api.editAvatar(data.avatar)
+    .then(() => {
+      popupAvatar.close()
     })
+    .finally(() => {
+      popupAvatar.renderLoading(false);
+    });
+    
+  }
+},config.popupAvatarUpdate);
+    
+popupAvatar.setEventListeners();
+    
+config.avatar.addEventListener( 'click', () => {
+  updateAvatarValidation.unlockButton();
+  popupAvatar.open();
+}) 
+    
+api.getAppInfo()
+.then(([ dataCard, dataUser ]) => {
+
+    userInfo.setUserId(dataUser._id);
+    userInfo.setUserInfo(dataUser.name, dataUser.about);
+    userInfo.setAvatar(dataUser.avatar);
+
+    const cardElement = new Section({ 
+      items: dataCard.reverse(),
+      renderer: (item) => {
+        cardElement.addItem(createCard(item))
+        }, 
+    }, config.itemCard)
+
+    cardElement.renderItems();
+
+    const popupItemForm = new PopupWithForm({
+      submit: (data) =>{
+        popupItemForm.renderLoading(true)
+        api.addCard(data)
+        .then((res) => {
+          cardElement.addItem(createCard(res));
+          popupItemForm.close();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          popupItemForm.renderLoading(false)
+        })
+      }
+    }, config.popupItems)
+
+    config.addBtn.addEventListener('click', () => {
+      newCardValidation.unlockButton()
+      popupItemForm.open();
+    })
+
+    popupItemForm.setEventListeners();
+
 })
 .catch((err) => {
   console.log(err)
-})
+}) 
 
 
 

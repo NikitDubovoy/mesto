@@ -4,6 +4,10 @@ export class Api {
         this._token = token
     }
     
+    getAppInfo() {
+        return Promise.all([this.getInitialCards(), this.getUser()]);
+      } 
+
     _getResponseData(data) {
         if (data.ok){
             return data.json()
